@@ -1,0 +1,11 @@
+table, th, td {
+    border: 1px solid black;
+}
+
+.positive {
+    background-color: green;
+}
+
+.negative {
+    background-color: red;
+}

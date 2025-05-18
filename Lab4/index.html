@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Мои финансы и не только мои</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link href="style.css" rel="stylesheet"/>
+  </head>
+  <body>
+    <h1>Финансовые сделки и прочие нарушения</h1>  
+
+    <form id="transaction-add">
+      <input type="number" name="amount" placeholder="Сумма транзакции" required>
+      <input type="datetime-local" id="date" name="date">;
+      <select name="category" required>
+	<option value="Еда">Еда</option>
+	<option value="Алкоголь">Алкоголь</option>
+	<option value="Развлечения">Развлечения</option>
+	<option value="Прочее">Прочее</option>
+      </select>
+      <input type="text" name="description" placeholder="Описание" required>
+      <button type="submit">Добавить транзакцию</button>
+    </form>
+
+    <h2>Список транзакций</h2>
+    <table id="transactions-table">
+      <tr>
+	<th>Дата-время</th>
+	<th>Сумма</th>
+	<th>Категория</th>
+	<th>Описание</th>
+	<th>Удалить?</th>
+      </tr>
+    </table>
+
+    <h1>Total: <span id="total">0</span></h1>
+    <p id="desc"></p>
+    <script type="module" src="./src/index.js"></script>
+  </body>
+</html>
