@@ -1,0 +1,288 @@
+
+* {
+    box-sizing: border-box;
+}
+
+.modal {
+    display: none;
+    z-index: 1010;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 95%;
+    max-width: 600px;
+    height: auto;
+    min-height: 400px;
+    max-height: 90vh;
+    border-radius: 30px;
+    background: white;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border: 2px solid #e0e0e0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d3436;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.modal label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-weight: 500;
+    color: #636e72;
+}
+
+.modal textarea,
+.modal input[type="date"] {
+    padding: 12px;
+    border: 2px solid #dfe6e9;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.modal textarea:focus,
+.modal input[type="date"]:focus {
+    border-color: #6c5ce7;
+    outline: none;
+}
+
+#modal-overlay {
+    display: none;
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #b2b2b261;
+    backdrop-filter: blur(3px);
+}
+
+main {
+    display: grid;
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 1rem;
+    grid-template-areas:
+        "title title"
+        "tasks controls";
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto 1fr;
+    gap: 1rem;
+}
+
+#title {
+    grid-area: title;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #2d3436;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 0.5rem;
+}
+
+#controls {
+    grid-area: controls;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    min-width: 260px;
+}
+
+button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #6c5ce7, #a363d9);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108,92,231,0.4);
+}
+
+#search {
+    padding: 12px;
+    border: 2px solid #dfe6e9;
+    border-radius: 8px;
+    background: white;
+    transition: all 0.3s;
+}
+
+#search:focus {
+    border-color: #6c5ce7;
+    box-shadow: 0 0 0 3px rgba(108,92,231,0.1);
+    outline: none;
+}
+
+#dragdrop {
+    padding: 1.5rem;
+    border: 2px dashed #b2bec3;
+    border-radius: 10px;
+    text-align: center;
+    color: #636e72;
+    transition: all 0.3s;
+}
+
+#dragdrop:hover {
+    border-color: #6c5ce7;
+    background: rgba(108,92,231,0.05);
+}
+
+#tasks {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+#tasks thead {
+    display: table;
+    width: 100%;
+}
+
+#tasks th {
+    background: #6c5ce7;
+    color: white;
+    padding: 0.75rem;
+    font-weight: 600;
+    text-align: left;
+    word-break: break-word;
+}
+
+#tasks td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #f1f3f5;
+    color: #2d3436;
+    word-break: break-word;
+}
+
+#tasks tbody {
+    height: 100%;
+    display: block;
+    overflow-y: auto;
+}
+
+#tasks tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+#tasks tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+#tasks tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Кастомный скроллбар */
+#tasks tbody::-webkit-scrollbar {
+    width: 8px;
+}
+
+#tasks tbody::-webkit-scrollbar-track {
+    background: #f1f3f5;
+}
+
+#tasks tbody::-webkit-scrollbar-thumb {
+    background: #b2bec3;
+    border-radius: 4px;
+}
+
+#tasks tbody::-webkit-scrollbar-thumb:hover {
+    background: #6c5ce7;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    main {
+        grid-template-areas:
+            "title"
+            "controls"
+            "tasks";
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr;
+    }
+
+    #controls {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        min-width: auto;
+    }
+
+    button {
+        flex: 1 1 45%;
+        min-width: 120px;
+    }
+
+    #title {
+        font-size: 1.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal {
+        border-radius: 15px;
+        padding: 15px;
+    }
+
+    button {
+        padding: 10px 15px;
+    }
+
+    #tasks th,
+    #tasks td {
+        padding: 0.5rem;
+    }
+}
+
+
+/* Стили для просроченных задач */
+#tasks tbody tr.expired {
+    background: #fff5f5;
+    position: relative;
+    animation: pulse-alert 1.5s ease-in-out infinite alternate;
+}
+
+#tasks tbody tr.expired td {
+    color: #dc3545;
+    font-weight: 500;
+}
+
+@keyframes pulse-alert {
+    from {
+        box-shadow: inset 0 0 0 0 rgba(220,53,69,0.1);
+    }
+    to {
+        box-shadow: inset 0 0 12px 0 rgba(220,53,69,0.15);
+    }
+}
